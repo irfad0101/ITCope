@@ -77,6 +77,17 @@ public class DetailsForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDetails);
 
+        txtSeacrh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSeacrhActionPerformed(evt);
+            }
+        });
+        txtSeacrh.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSeacrhKeyTyped(evt);
+            }
+        });
+
         btnSearch.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnSearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/zoom_in.png"))); // NOI18N
         btnSearch.setText(" Search");
@@ -157,6 +168,27 @@ public class DetailsForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblDetailsMouseClicked
 
+    private void txtSeacrhKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSeacrhKeyTyped
+        if (cmbxSearchMode.getSelectedIndex()==1){
+            char c = evt.getKeyChar();
+            if (txtSeacrh.getText().length() < 9 && !Character.isDigit(c)) {
+                evt.consume();
+                return;
+            }
+            if (txtSeacrh.getText().length() == 9 && !(c == 'v' || c == 'V' || c == 'x' || c == 'X')) {
+                evt.consume();
+                return;
+            }
+            if (txtSeacrh.getText().length() == 10) {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtSeacrhKeyTyped
+
+    private void txtSeacrhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeacrhActionPerformed
+        btnSearchActionPerformed(null);
+    }//GEN-LAST:event_txtSeacrhActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,6 +219,7 @@ public class DetailsForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new DetailsForm().setVisible(true);
             }

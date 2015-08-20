@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.sql.Date;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -83,6 +82,20 @@ public class Help {
             return false;
         }
         return true;
+    }
+   
+    public static boolean allowOnlyDigit(String text, int limit, char key) {
+        if (limit>0 && text.length() == limit) {
+            return false;
+        }
+        if (!Character.isDigit(key)) {
+            return false;
+        }
+        return true;
+    }
+    
+    public static boolean isValidNIC(String NIC){
+        return NIC.matches("\\d{9}[VvXx]");
     }
     
 }

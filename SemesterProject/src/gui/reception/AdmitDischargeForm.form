@@ -171,6 +171,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPIDKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtPatientName">
       <Properties>
@@ -197,6 +200,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAdmitYearKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel15">
       <Properties>
@@ -212,6 +218,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAdmitMonthKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
       <Properties>
@@ -227,6 +236,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAdmitDayKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAdmitDisharge">
       <Properties>
@@ -262,6 +274,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtRoomNumberKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDischargeDay">
       <Properties>
@@ -269,6 +284,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDischargeDayKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDischargeD">
       <Properties>
@@ -284,6 +302,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDischargeMonthKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDischargeM">
       <Properties>
@@ -299,6 +320,9 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDischargeYearKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblDischargeY">
       <Properties>

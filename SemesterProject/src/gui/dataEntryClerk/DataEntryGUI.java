@@ -8,6 +8,7 @@ import Domain.ChronicConditionsReport;
 import Domain.MedicalReport;
 import Domain.Patient;
 import gui.login.LoginFace;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -142,28 +143,53 @@ public class DataEntryGUI extends javax.swing.JFrame {
         jLabel17.setText("Patient ID :");
 
         txtReportPID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtReportPID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtReportPIDKeyTyped(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("Doctor ID :");
 
         txtReportDID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtReportDID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtReportDIDKeyTyped(evt);
+            }
+        });
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText("Date :");
 
         txtReportDay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtReportDay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtReportDayKeyTyped(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel21.setText("DD");
 
         txtReportMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtReportMonth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtReportMonthKeyTyped(evt);
+            }
+        });
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel22.setText("MM");
 
         txtReportYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtReportYear.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtReportYearKeyTyped(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setText("YYYY");
@@ -305,6 +331,16 @@ public class DataEntryGUI extends javax.swing.JFrame {
         jLabel13.setText("Allergies :");
 
         txtPID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtPID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPIDActionPerformed(evt);
+            }
+        });
+        txtPID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPIDKeyTyped(evt);
+            }
+        });
 
         txtFirstName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -313,16 +349,36 @@ public class DataEntryGUI extends javax.swing.JFrame {
         txtFullName1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtYear.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtYearKeyTyped(evt);
+            }
+        });
 
         txtAddress1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtNIC.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtNIC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNICKeyTyped(evt);
+            }
+        });
 
         txtPatientContactNo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtPatientContactNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPatientContactNoKeyTyped(evt);
+            }
+        });
 
         txtNameOfGuardian.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         txtGuardianContact.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtGuardianContact.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGuardianContactKeyTyped(evt);
+            }
+        });
 
         txtAllergies1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -336,8 +392,18 @@ public class DataEntryGUI extends javax.swing.JFrame {
         jLabel15.setText("MM");
 
         txtMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtMonth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMonthKeyTyped(evt);
+            }
+        });
 
         txtDay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDayKeyTyped(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("DD");
@@ -374,6 +440,7 @@ public class DataEntryGUI extends javax.swing.JFrame {
         });
 
         cmbxBloodGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
+        cmbxBloodGroup.setSelectedIndex(-1);
 
         btnChronicConditions.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnChronicConditions.setText("Chronic Conditions ...");
@@ -664,7 +731,7 @@ public class DataEntryGUI extends javax.swing.JFrame {
         txtPatientContactNo.setText("");
         txtNameOfGuardian.setText("");
         txtGuardianContact.setText("");
-        cmbxBloodGroup.setSelectedIndex(0);
+        cmbxBloodGroup.setSelectedIndex(-1);
         txtAllergies1.setText("");
         txtAllergies2.setText("");
         btnUpdatePatient.setEnabled(false);
@@ -732,8 +799,10 @@ public class DataEntryGUI extends javax.swing.JFrame {
             p = null;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Sorry, an error occured while loading patient", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         } catch (ConnectionTimeOutException ex) {
             JOptionPane.showMessageDialog(this, "Cannot load patient. Connection Timed out. Please try again.", "Time out", JOptionPane.WARNING_MESSAGE);
+            return;
         }
         if (p == null){
             JOptionPane.showMessageDialog(this, "Invalid Patient ID", null, JOptionPane.ERROR_MESSAGE);
@@ -755,10 +824,21 @@ public class DataEntryGUI extends javax.swing.JFrame {
             }
             txtAddress1.setText(p.getAddress());
             txtNIC.setText(p.getNIC());
-            txtPatientContactNo.setText(Integer.toString(p.getPatientContactNo()));
+            if (p.getPatientContactNo()==0){
+                txtPatientContactNo.setText("");
+            } else {
+                txtPatientContactNo.setText(Integer.toString(p.getPatientContactNo()));
+            }
             txtNameOfGuardian.setText(p.getNameOfTheGuardian());
-            txtGuardianContact.setText(Integer.toString(p.getGuardianContactNo()));
-            switch(p.getBloodGroup()){
+            if (p.getGuardianContactNo()==0){
+                txtGuardianContact.setText("");
+            } else {
+                txtGuardianContact.setText(Integer.toString(p.getGuardianContactNo()));
+            }
+            String bloodGroup = p.getBloodGroup();
+            if (bloodGroup==null)
+                bloodGroup = "";
+            switch(bloodGroup){
                 case "A+":
                     cmbxBloodGroup.setSelectedIndex(0); break;
                 case "A-":
@@ -775,6 +855,8 @@ public class DataEntryGUI extends javax.swing.JFrame {
                     cmbxBloodGroup.setSelectedIndex(6); break;
                 case "O-":
                     cmbxBloodGroup.setSelectedIndex(7); break;
+                default:
+                    cmbxBloodGroup.setSelectedIndex(-1);
             }
             txtAllergies1.setText(p.getAllergies());
             btnUpdatePatient.setEnabled(true);
@@ -810,12 +892,87 @@ public class DataEntryGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnChronicConditionsActionPerformed
 
+    private void txtReportPIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReportPIDKeyTyped
+        if (!Help.allowOnlyDigit(txtReportPID.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtReportPIDKeyTyped
+
+    private void txtReportDIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReportDIDKeyTyped
+        if (!Help.allowOnlyDigit(txtReportDID.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtReportDIDKeyTyped
+
+    private void txtReportYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReportYearKeyTyped
+        if (!Help.allowOnlyDigit(txtReportYear.getText(), 4, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtReportYearKeyTyped
+
+    private void txtReportMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReportMonthKeyTyped
+        if (!Help.allowOnlyDigit(txtReportMonth.getText(), 2, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtReportMonthKeyTyped
+
+    private void txtReportDayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReportDayKeyTyped
+        if (!Help.allowOnlyDigit(txtReportDay.getText(), 2, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtReportDayKeyTyped
+
+    private void txtPIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPIDKeyTyped
+        if (!Help.allowOnlyDigit(txtPID.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtPIDKeyTyped
+
+    private void txtYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtYearKeyTyped
+        if (!Help.allowOnlyDigit(txtYear.getText(), 4, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtYearKeyTyped
+
+    private void txtMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMonthKeyTyped
+        if (!Help.allowOnlyDigit(txtMonth.getText(), 2, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtMonthKeyTyped
+
+    private void txtDayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDayKeyTyped
+        if (!Help.allowOnlyDigit(txtDay.getText(), 2, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtDayKeyTyped
+
+    private void txtNICKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNICKeyTyped
+        char c = evt.getKeyChar();
+        if (txtNIC.getText().length()<9 && !Character.isDigit(c)){
+            evt.consume();
+            return;
+        }
+        if (txtNIC.getText().length()==9 && !(c=='v' || c=='V' || c=='x' || c=='X')){
+            evt.consume();
+            return;
+        }
+        if (txtNIC.getText().length()==10){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNICKeyTyped
+
+    private void txtPatientContactNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatientContactNoKeyTyped
+        if (!Help.allowOnlyDigit(txtPatientContactNo.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtPatientContactNoKeyTyped
+
+    private void txtGuardianContactKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGuardianContactKeyTyped
+        if (!Help.allowOnlyDigit(txtGuardianContact.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtGuardianContactKeyTyped
+
+    private void txtPIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPIDActionPerformed
+        btnLoadPatientActionPerformed(null);
+    }//GEN-LAST:event_txtPIDActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new DataEntryGUI().setVisible(true);
             }

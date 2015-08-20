@@ -233,6 +233,7 @@ public class LoginFace extends javax.swing.JFrame {
 
     private void pasPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasPasswordActionPerformed
         logIn();
+        this.txtUserName.requestFocus();
     }//GEN-LAST:event_pasPasswordActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed

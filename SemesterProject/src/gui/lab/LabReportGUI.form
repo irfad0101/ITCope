@@ -802,6 +802,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textPatientID">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textPatientIDKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labTechnicianID">
           <Properties>
@@ -813,6 +816,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="textLabTecID">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textLabTecIDKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="testID">
           <Properties>
@@ -874,6 +880,9 @@
               <Font name="Calibri" size="14" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textYearKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -886,6 +895,9 @@
               <Font name="Calibri" size="14" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textMonthKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -898,6 +910,9 @@
               <Font name="Calibri" size="14" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="textDateKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -7,12 +7,9 @@ package gui.lab;
 import DataBase.DBOperations;
 import DataBase.Help;
 import Domain.LabReport;
-import gui.login.LoginFace;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *

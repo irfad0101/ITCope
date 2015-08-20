@@ -498,7 +498,7 @@ public class DocGUI extends javax.swing.JFrame {
             }
             detailList.setModel(new DefaultListModel());
             DefaultListModel model = (DefaultListModel)detailList.getModel(); 
-             model.addElement("Name : " + pnt.getFullName());
+            model.addElement("Name : " + pnt.getFullName());
             model.addElement("Date of birth : " + pnt.getDateOfBirth());
             model.addElement("Gender : " + pnt.getGender());
             model.addElement(("Blood group : " + pnt.getBloodGroup()));

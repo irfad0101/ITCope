@@ -31,6 +31,7 @@ public class EmployeeList extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         model = (DefaultTableModel) empTable.getModel();
+        positionCombo.setVisible(false);
     }
     
     
@@ -53,6 +54,7 @@ public class EmployeeList extends javax.swing.JFrame {
         exitBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        positionCombo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +78,11 @@ public class EmployeeList extends javax.swing.JFrame {
         jScrollPane1.setViewportView(empTable);
 
         searchTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Position", "NIC" }));
+        searchTypeCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTypeComboActionPerformed(evt);
+            }
+        });
 
         searchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/zoom_in.png"))); // NOI18N
         searchBtn.setText("Search");
@@ -98,6 +105,8 @@ public class EmployeeList extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/login/Secound5.png"))); // NOI18N
 
+        positionCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Doctor", "Reception", "DataEntryClerk", "LabTechniciant" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,16 +121,18 @@ public class EmployeeList extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(exitBtn))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(29, 29, 29)
                         .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
+                        .addGap(51, 51, 51)
+                        .addComponent(positionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
                         .addComponent(searchBtn)
-                        .addGap(0, 375, Short.MAX_VALUE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 910, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -134,7 +145,8 @@ public class EmployeeList extends javax.swing.JFrame {
                     .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(positionCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
@@ -180,9 +192,10 @@ public class EmployeeList extends javax.swing.JFrame {
             }            
         }
         
-        if(searchType==1){            
+        if(searchType==1){ 
+            
             for(Employee em : empList){
-                if(em.getPosition().equalsIgnoreCase(search)){                    
+                if(em.getPosition().equalsIgnoreCase(positionCombo.getSelectedItem().toString())){                    
                     this.addRow(em.getEID(), em.getName(), em.getPosition(), em.getNIC());
                     k++;
                 }                
@@ -210,6 +223,18 @@ public class EmployeeList extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void searchTypeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTypeComboActionPerformed
+        // TODO add your handling code here:
+        if(searchTypeCombo.getSelectedIndex()==1){
+            searchText.setVisible(false);
+            positionCombo.setVisible(true);
+        }
+        else{
+            searchText.setVisible(true);
+            positionCombo.setVisible(false);
+        }
+    }//GEN-LAST:event_searchTypeComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,6 +277,7 @@ public class EmployeeList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox positionCombo;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchText;
     private javax.swing.JComboBox searchTypeCombo;

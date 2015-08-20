@@ -340,6 +340,17 @@ public class ManagerFace extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Add new Employee", jPanel2);
 
+        changeIdText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeIdTextActionPerformed(evt);
+            }
+        });
+        changeIdText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                changeIdTextKeyTyped(evt);
+            }
+        });
+
         changeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/page_edit.png"))); // NOI18N
         changeBtn.setText("Change");
         changeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -429,9 +440,9 @@ public class ManagerFace extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid employee ID", "Error! ", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                nameLabel.setText(emp.getName());
-                posLabel.setText(emp.getPosition());
-                nicLabel.setText(emp.getNIC());
+                nameLabel.setText("Name :  " + emp.getName());
+                posLabel.setText("Position :  " + emp.getPosition());
+                nicLabel.setText("NIC :  " + emp.getNIC());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
@@ -613,7 +624,7 @@ public class ManagerFace extends javax.swing.JFrame {
             try {
                 changeEmpLog.getPreviousData(eid);
             } catch (SQLException ex) {
-                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Please enter a valid EID. You can check the employee list to find an ID", "Enter an ID ", JOptionPane.INFORMATION_MESSAGE);
             }
             changeEmpLog.setVisible(true);
         }
@@ -625,6 +636,19 @@ public class ManagerFace extends javax.swing.JFrame {
     private void nicTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nicTextActionPerformed
+
+    private void changeIdTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeIdTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changeIdTextActionPerformed
+
+    private void changeIdTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_changeIdTextKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_changeIdTextKeyTyped
 
     
     public static void main(String args[]) {

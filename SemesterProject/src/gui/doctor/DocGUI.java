@@ -13,6 +13,7 @@ import Domain.MedicalReport;
 import Domain.Patient;
 import gui.lab.ShowLabReportGUI;
 import gui.login.LoginFace;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
@@ -164,6 +165,9 @@ public class DocGUI extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 SearchBoxKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SearchBoxKeyTyped(evt);
+            }
         });
 
         SearchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/zoom_in.png"))); // NOI18N
@@ -254,33 +258,49 @@ public class DocGUI extends javax.swing.JFrame {
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         mode = 1;
         if(SearchCatChooser.getSelectedIndex()==0){
-            pid = Integer.parseInt(SearchBox.getText());
+            if(!"".equals(SearchBox.getText())){
+                 pid = Integer.parseInt(SearchBox.getText());
+            }
         }
         if(SearchCatChooser.getSelectedIndex()==1){            
             String NIC = SearchBox.getText();
+            if(NIC.contains("V")||NIC.contains("X")){
+                try {
+                    pid = ptDB.getPID(NIC);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ConnectionTimeOutException ex) {
+                    Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Please enter a valid NIC", "Invalid NIC ", JOptionPane.INFORMATION_MESSAGE);
+            }
        
         }
         DBOperations dateOpr = DBOperations.getInstace(); 
-        try {
-            pnt = dateOpr.getPatient(pid);
-        } catch (SQLException ex) {
-            Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConnectionTimeOutException ex) {
-            JOptionPane.showMessageDialog(null,ex.toString());
-            return;
+        if(pid!=0){
+            try {
+                pnt = dateOpr.getPatient(pid);
+            } catch (SQLException ex) {
+                Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ConnectionTimeOutException ex) {
+                JOptionPane.showMessageDialog(null,ex.toString());
+                return;
+            }
+            int index = SearchCatChooser.getSelectedIndex();
+            if(index==1){
+                String nic = SearchBox.getText();
+
+            }
+            detailList.setModel(new DefaultListModel());
+            DefaultListModel model = (DefaultListModel)detailList.getModel(); 
+            model.addElement("Name : " + pnt.getFullName());
+            model.addElement("Date of birth : " + pnt.getDateOfBirth());
+            model.addElement("Gender : " + pnt.getGender());
+            model.addElement(("Blood group : " + pnt.getBloodGroup()));
+            model.addElement(("Allergies : " + pnt.getAllergies()));
         }
-        int index = SearchCatChooser.getSelectedIndex();
-        if(index==1){
-            String nic = SearchBox.getText();
-            
-        }
-        detailList.setModel(new DefaultListModel());
-        DefaultListModel model = (DefaultListModel)detailList.getModel(); 
-        model.addElement("Name : " + pnt.getFullName());
-        model.addElement("Date of birth : " + pnt.getDateOfBirth());
-        model.addElement("Gender : " + pnt.getGender());
-        model.addElement(("Blood group : " + pnt.getBloodGroup()));
-        model.addElement(("Allergies : " + pnt.getAllergies()));
         
     }//GEN-LAST:event_SearchButtonActionPerformed
 
@@ -487,6 +507,45 @@ public class DocGUI extends javax.swing.JFrame {
         
         }
     }//GEN-LAST:event_SearchBoxKeyReleased
+
+    private void SearchBoxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchBoxKeyTyped
+        // TODO add your handling code here:
+        if(SearchCatChooser.getSelectedIndex()==1){
+             char c = evt.getKeyChar();
+            String nic = SearchBox.getText();
+            if(nic.length()==10){
+                evt.consume();
+            }
+            if(nic.length()==9){
+                if(((c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)||(c==KeyEvent.VK_V))||(c==KeyEvent.VK_X)){
+            } else {
+                evt.consume();
+            }
+            }
+            else if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+
+            }
+        else if(SearchCatChooser.getSelectedIndex()==0){
+               char c = evt.getKeyChar();
+            String nic = SearchBox.getText();
+            if(nic.length()==10){
+                evt.consume();
+            }
+            if(nic.length()==9){
+                if(((c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+            }
+            else if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_SearchBoxKeyTyped
 
     
     /**

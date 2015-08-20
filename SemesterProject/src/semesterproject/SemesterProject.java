@@ -130,7 +130,7 @@ public class SemesterProject {
             UIManager.setLookAndFeel(new AcrylLookAndFeel());
         } catch (Exception e) {            
         */
-       /*try {
+       try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -141,7 +141,7 @@ public class SemesterProject {
 
         }
         LoginFace login = new LoginFace();
-        login.setVisible(true);*/
+        login.setVisible(true);
 
        /* try {
              //ad.setRoomAvailability(2,false);

@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.sql.Date;
 import java.io.File;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,29 +33,32 @@ public class Help {
     public static int getDay(Date date){
         return date.getDate();
     }
-    public static void writeIPandPort(String ip,String port){
+    public static boolean writeIPandPort(String ip,String port){
         String text = ip+"\n"+port;
         BufferedWriter output = null;
         try {
-            File file = new File("example.itcope");
+            File file = new File("ipPort.itcope");
             output = new BufferedWriter(new FileWriter(file));
             output.write(text);            
-        } catch ( IOException e ) {
-            //e.printStackTrace();
+        } catch ( IOException e ) { 
+            return false;
+        }catch(Exception e){
+            return false;
         } finally {
             if ( output != null ) try {
                 output.close();                
             } catch (IOException ex) {
-                //Logger.getLogger(Help.class.getName()).log(Level.SEVERE, null, ex);
+               
             }
         }
+        return true;
     }
     public static String [] readIPandPort(){
         BufferedReader br = null;
         String []ipAndPort = new String[2];
         try {
             String sCurrentLine;
-            br = new BufferedReader(new FileReader("example.itcope"));
+            br = new BufferedReader(new FileReader("ipPort.itcope"));
             int i = 0;
             while ((sCurrentLine = br.readLine()) != null) {                
                 ipAndPort[i++] = sCurrentLine;

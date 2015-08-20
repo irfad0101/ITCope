@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
-import sun.security.util.Password;
 
 /**
  *
@@ -99,6 +98,7 @@ public class ManagerFace extends javax.swing.JFrame {
         changeBtn = new javax.swing.JButton();
         getEmpListBtn = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +112,6 @@ public class ManagerFace extends javax.swing.JFrame {
             }
         });
 
-        SearchBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/zoom_in.png"))); // NOI18N
         SearchBtn.setText("Search");
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,11 +144,11 @@ public class ManagerFace extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(nameLabel)
-                .addGap(55, 55, 55)
+                .addGap(53, 53, 53)
                 .addComponent(posLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
                 .addComponent(nicLabel)
-                .addGap(35, 35, 35))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         removeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/user_remove.png"))); // NOI18N
@@ -180,7 +179,7 @@ public class ManagerFace extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(eidText, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addComponent(SearchBtn)
                         .addGap(38, 38, 38)
                         .addComponent(eListBtn))
@@ -257,7 +256,7 @@ public class ManagerFace extends javax.swing.JFrame {
                 .addGap(89, 89, 89)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nicText)
-                    .addComponent(nameText, javax.swing.GroupLayout.DEFAULT_SIZE, 510, Short.MAX_VALUE)
+                    .addComponent(nameText, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                     .addComponent(conPassText)
                     .addComponent(unameText)
                     .addComponent(passText)
@@ -332,7 +331,7 @@ public class ManagerFace extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(cancelBtn))
@@ -340,6 +339,17 @@ public class ManagerFace extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Add new Employee", jPanel2);
+
+        changeIdText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeIdTextActionPerformed(evt);
+            }
+        });
+        changeIdText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                changeIdTextKeyTyped(evt);
+            }
+        });
 
         changeBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/page_edit.png"))); // NOI18N
         changeBtn.setText("Change");
@@ -368,11 +378,11 @@ public class ManagerFace extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(changeIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(changeBtn)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(getEmpListBtn)
-                .addGap(67, 67, 67))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,24 +393,31 @@ public class ManagerFace extends javax.swing.JFrame {
                     .addComponent(changeBtn)
                     .addComponent(changeIdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap(293, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Edit data", jPanel5);
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/login/Secound5.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1)
                 .addGap(37, 37, 37))
         );
@@ -423,9 +440,9 @@ public class ManagerFace extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Invalid employee ID", "Error! ", JOptionPane.INFORMATION_MESSAGE);
             }
             else{
-                nameLabel.setText(emp.getName());
-                posLabel.setText(emp.getPosition());
-                nicLabel.setText(emp.getNIC());
+                nameLabel.setText("Name :  " + emp.getName());
+                posLabel.setText("Position :  " + emp.getPosition());
+                nicLabel.setText("NIC :  " + emp.getNIC());
             }
         } catch (SQLException ex) {
             Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
@@ -607,7 +624,7 @@ public class ManagerFace extends javax.swing.JFrame {
             try {
                 changeEmpLog.getPreviousData(eid);
             } catch (SQLException ex) {
-                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Please enter a valid EID. You can check the employee list to find an ID", "Enter an ID ", JOptionPane.INFORMATION_MESSAGE);
             }
             changeEmpLog.setVisible(true);
         }
@@ -619,6 +636,19 @@ public class ManagerFace extends javax.swing.JFrame {
     private void nicTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nicTextActionPerformed
+
+    private void changeIdTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeIdTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_changeIdTextActionPerformed
+
+    private void changeIdTextKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_changeIdTextKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_changeIdTextKeyTyped
 
     
     public static void main(String args[]) {
@@ -671,6 +701,7 @@ public class ManagerFace extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

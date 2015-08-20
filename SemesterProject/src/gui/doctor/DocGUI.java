@@ -13,7 +13,7 @@ import Domain.MedicalReport;
 import Domain.Patient;
 import gui.lab.ShowLabReportGUI;
 import gui.login.LoginFace;
-import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.Date;
@@ -115,12 +115,13 @@ public class DocGUI extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         ptDetailsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/doctor/genetics.png"))); // NOI18N
         ptDetailsBtn.setText("Patient details");
+        ptDetailsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         ptDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ptDetailsBtnActionPerformed(evt);
@@ -137,6 +138,7 @@ public class DocGUI extends javax.swing.JFrame {
 
         labReportsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/doctor/ecg_chart.png"))); // NOI18N
         labReportsBtn.setText("Lab Reports");
+        labReportsBtn.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         labReportsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 labReportsBtnActionPerformed(evt);
@@ -162,6 +164,9 @@ public class DocGUI extends javax.swing.JFrame {
         SearchBox.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 SearchBoxKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SearchBoxKeyTyped(evt);
             }
         });
 
@@ -214,10 +219,10 @@ public class DocGUI extends javax.swing.JFrame {
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ptDetailsBtn)
-                            .addComponent(labReportsBtn)
-                            .addComponent(TreatReportsBtn))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TreatReportsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ptDetailsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labReportsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,13 +235,13 @@ public class DocGUI extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ptDetailsBtn)
                         .addGap(18, 18, 18)
                         .addComponent(TreatReportsBtn)
                         .addGap(18, 18, 18)
                         .addComponent(labReportsBtn)
-                        .addGap(73, 73, 73))
+                        .addGap(90, 90, 90))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -253,33 +258,49 @@ public class DocGUI extends javax.swing.JFrame {
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         mode = 1;
         if(SearchCatChooser.getSelectedIndex()==0){
-            pid = Integer.parseInt(SearchBox.getText());
+            if(!"".equals(SearchBox.getText())){
+                 pid = Integer.parseInt(SearchBox.getText());
+            }
         }
         if(SearchCatChooser.getSelectedIndex()==1){            
             String NIC = SearchBox.getText();
-       //     ptDB.c
+            if(NIC.contains("V")||NIC.contains("X")){
+                try {
+                    pid = ptDB.getPID(NIC);
+                } catch (SQLException ex) {
+                    Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ConnectionTimeOutException ex) {
+                    Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Please enter a valid NIC", "Invalid NIC ", JOptionPane.INFORMATION_MESSAGE);
+            }
+       
         }
         DBOperations dateOpr = DBOperations.getInstace(); 
-        try {
-            pnt = dateOpr.getPatient(pid);
-        } catch (SQLException ex) {
-            Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConnectionTimeOutException ex) {
-            JOptionPane.showMessageDialog(null,ex.toString());
-            return;
+        if(pid!=0){
+            try {
+                pnt = dateOpr.getPatient(pid);
+            } catch (SQLException ex) {
+                Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ConnectionTimeOutException ex) {
+                JOptionPane.showMessageDialog(null,ex.toString());
+                return;
+            }
+            int index = SearchCatChooser.getSelectedIndex();
+            if(index==1){
+                String nic = SearchBox.getText();
+
+            }
+            detailList.setModel(new DefaultListModel());
+            DefaultListModel model = (DefaultListModel)detailList.getModel(); 
+            model.addElement("Name : " + pnt.getFullName());
+            model.addElement("Date of birth : " + pnt.getDateOfBirth());
+            model.addElement("Gender : " + pnt.getGender());
+            model.addElement(("Blood group : " + pnt.getBloodGroup()));
+            model.addElement(("Allergies : " + pnt.getAllergies()));
         }
-        int index = SearchCatChooser.getSelectedIndex();
-        if(index==1){
-            String nic = SearchBox.getText();
-            //pnt = dateOpr.searchPatients(null,nic );
-        }
-        detailList.setModel(new DefaultListModel());
-        DefaultListModel model = (DefaultListModel)detailList.getModel(); 
-        model.addElement(pnt.getFullName());
-        model.addElement(pnt.getDateOfBirth());
-        model.addElement(pnt.getGender());
-        model.addElement(("Blood group : " + pnt.getBloodGroup()));
-        model.addElement(("Allergies : " + pnt.getAllergies()));
         
     }//GEN-LAST:event_SearchButtonActionPerformed
 
@@ -289,9 +310,9 @@ public class DocGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         detailList.setModel(new DefaultListModel());
         DefaultListModel model = (DefaultListModel)detailList.getModel(); 
-        model.addElement(pnt.getFullName());
-        model.addElement(pnt.getDateOfBirth());
-        model.addElement(pnt.getGender());
+        model.addElement("Name : " + pnt.getFullName());
+        model.addElement("Date of birth : " + pnt.getDateOfBirth());
+        model.addElement("Gender : " + pnt.getGender());
         model.addElement(("Blood group : " + pnt.getBloodGroup()));
         model.addElement(("Allergies : " + pnt.getAllergies()));
     }//GEN-LAST:event_ptDetailsBtnActionPerformed
@@ -362,7 +383,7 @@ public class DocGUI extends javax.swing.JFrame {
                 detailList.setModel(new DefaultListModel());
                 DefaultListModel model = (DefaultListModel)detailList.getModel(); 
                 for(MedicalReport mdRpt : mediReports){
-                     model.addElement(("Report num : " + mdRpt.getMedicalReportNum()+" Test types : "+ mdRpt.getTestTypes()));
+                     model.addElement(("Report num : " + mdRpt.getMedicalReportNum()+"    Test types : "+ mdRpt.getTestTypes()));
                 }
                  mode = 4;
             } 
@@ -383,7 +404,7 @@ public class DocGUI extends javax.swing.JFrame {
                 detailList.setModel(new DefaultListModel());
                 DefaultListModel model = (DefaultListModel)detailList.getModel(); 
                 for(LabReport lbRpt : labReports){
-                     model.addElement(("Report num : " + lbRpt.getLabReportNo()+" Test types : "+ lbRpt.getTestType()));
+                     model.addElement(("Report num : " + lbRpt.getLabReportNo()+" Test types : "+ lbRpt.getTestName()));
                  }
                 mode = 5;
             }
@@ -477,15 +498,54 @@ public class DocGUI extends javax.swing.JFrame {
             }
             detailList.setModel(new DefaultListModel());
             DefaultListModel model = (DefaultListModel)detailList.getModel(); 
-            model.addElement(pnt.getFullName());
-            model.addElement(pnt.getDateOfBirth());
-            model.addElement(pnt.getGender());
+             model.addElement("Name : " + pnt.getFullName());
+            model.addElement("Date of birth : " + pnt.getDateOfBirth());
+            model.addElement("Gender : " + pnt.getGender());
             model.addElement(("Blood group : " + pnt.getBloodGroup()));
             model.addElement(("Allergies : " + pnt.getAllergies()));
         
         
         }
     }//GEN-LAST:event_SearchBoxKeyReleased
+
+    private void SearchBoxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchBoxKeyTyped
+        // TODO add your handling code here:
+        if(SearchCatChooser.getSelectedIndex()==1){
+             char c = evt.getKeyChar();
+            String nic = SearchBox.getText();
+            if(nic.length()==10){
+                evt.consume();
+            }
+            if(nic.length()==9){
+                if(((c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE)||(c==KeyEvent.VK_V))||(c==KeyEvent.VK_X)){
+            } else {
+                evt.consume();
+            }
+            }
+            else if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+
+            }
+        else if(SearchCatChooser.getSelectedIndex()==0){
+               char c = evt.getKeyChar();
+            String nic = SearchBox.getText();
+            if(nic.length()==10){
+                evt.consume();
+            }
+            if(nic.length()==9){
+                if(((c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+            }
+            else if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_SearchBoxKeyTyped
 
     
     /**

@@ -9,6 +9,7 @@ import DataBase.DBOperations;
 import DataBase.Help;
 import Domain.LabReport;
 import gui.login.LoginFace;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -532,9 +533,21 @@ public class LabReportGUI extends javax.swing.JFrame {
         patientID.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         patientID.setText("Patient ID:");
 
+        textPatientID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textPatientIDKeyTyped(evt);
+            }
+        });
+
         labTechnicianID.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         labTechnicianID.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labTechnicianID.setText("Lab Technician ID:");
+
+        textLabTecID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textLabTecIDKeyTyped(evt);
+            }
+        });
 
         testID.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         testID.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -560,14 +573,29 @@ public class LabReportGUI extends javax.swing.JFrame {
         jLabel2.setText("YYYY");
 
         textYear.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        textYear.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textYearKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("MM");
 
         textMonth.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        textMonth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textMonthKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("DD");
 
         textDate.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        textDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textDateKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout generalDetailPanelLayout = new javax.swing.GroupLayout(generalDetailPanel);
         generalDetailPanel.setLayout(generalDetailPanelLayout);
@@ -776,8 +804,13 @@ public class LabReportGUI extends javax.swing.JFrame {
             return;
         }
         try{
-            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer){
-                labReport.setDate(Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText())));
+            Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
+            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
+                labReport.setDate(testDate);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Date is incorrect");
+                return;
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Date is incorrect");
@@ -858,8 +891,13 @@ public class LabReportGUI extends javax.swing.JFrame {
             return;
         }
         try{
-            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer){
-                labReport.setDate(Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText())));
+            Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
+            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
+                labReport.setDate(testDate);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Date is incorrect");
+                return;
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Date is incorrect");
@@ -944,8 +982,13 @@ public class LabReportGUI extends javax.swing.JFrame {
             return;
         }
         try{
-            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer){
-                labReport.setDate(Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText())));
+            Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
+            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
+                labReport.setDate(testDate);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Date is incorrect");
+                return;
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Date is incorrect");
@@ -1033,8 +1076,13 @@ public class LabReportGUI extends javax.swing.JFrame {
             return;
         }
         try{
-            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer){
-                labReport.setDate(Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText())));
+            Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
+            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
+                labReport.setDate(testDate);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Date is incorrect");
+                return;
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Date is incorrect");
@@ -1124,8 +1172,13 @@ public class LabReportGUI extends javax.swing.JFrame {
             return;
         }
         try{
-            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer){
-                labReport.setDate(Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText())));
+            Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
+            if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
+                labReport.setDate(testDate);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Date is incorrect");
+                return;
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Date is incorrect");
@@ -1248,6 +1301,36 @@ public class LabReportGUI extends javax.swing.JFrame {
             new LoginFace().setVisible(true);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void textPatientIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textPatientIDKeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textPatientIDKeyTyped
+
+    private void textLabTecIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textLabTecIDKeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textLabTecIDKeyTyped
+
+    private void textYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textYearKeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textYearKeyTyped
+
+    private void textMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textMonthKeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textMonthKeyTyped
+
+    private void textDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textDateKeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_textDateKeyTyped
      
     /**
      * @param args the command line arguments

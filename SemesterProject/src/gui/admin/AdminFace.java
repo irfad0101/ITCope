@@ -97,10 +97,16 @@ public class AdminFace extends javax.swing.JFrame {
 
         jLabel9.setText("New IP:");
 
+        txtPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPortKeyTyped(evt);
+            }
+        });
+
         jLabel10.setText("New Port:");
 
         cancelBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/manager/remove.png"))); // NOI18N
-        cancelBtn1.setText("Cancel");
+        cancelBtn1.setText("Exit");
         cancelBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelBtn1ActionPerformed(evt);
@@ -449,6 +455,24 @@ public class AdminFace extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nicTextActionPerformed
 
+    private void txtPortKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPortKeyTyped
+        char c = evt.getKeyChar();
+        String nic = nicText.getText();
+        if(nic.length()==10){
+            evt.consume();
+        }
+        if(nic.length()==9){
+            if(((c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            } else {
+                evt.consume();
+            }
+        }
+        else if((Character.isDigit(c)||(c==KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPortKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -473,7 +497,7 @@ public class AdminFace extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-               // new AdminFace().setVisible(true);
+                new AdminFace(true).setVisible(true);
             }
         });
     }

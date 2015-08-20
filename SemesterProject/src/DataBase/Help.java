@@ -42,6 +42,8 @@ public class Help {
             output.write(text);            
         } catch ( IOException e ) { 
             return false;
+        }catch(Exception e){
+            return false;
         } finally {
             if ( output != null ) try {
                 output.close();                

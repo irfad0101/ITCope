@@ -66,6 +66,8 @@ public class LoginFace extends javax.swing.JFrame {
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null,ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+                txtUserName.setText(null);
+                pasPassword.setText(null);
             }
         }
     }

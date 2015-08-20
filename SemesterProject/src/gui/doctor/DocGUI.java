@@ -308,6 +308,7 @@ public class DocGUI extends javax.swing.JFrame {
     
     private void ptDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ptDetailsBtnActionPerformed
         // TODO add your handling code here:
+        if(pnt!=null){
         detailList.setModel(new DefaultListModel());
         DefaultListModel model = (DefaultListModel)detailList.getModel(); 
         model.addElement("Name : " + pnt.getFullName());
@@ -315,6 +316,10 @@ public class DocGUI extends javax.swing.JFrame {
         model.addElement("Gender : " + pnt.getGender());
         model.addElement(("Blood group : " + pnt.getBloodGroup()));
         model.addElement(("Allergies : " + pnt.getAllergies()));
+        }
+        else{
+            
+        }
     }//GEN-LAST:event_ptDetailsBtnActionPerformed
 
     private void TreatReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TreatReportsBtnActionPerformed

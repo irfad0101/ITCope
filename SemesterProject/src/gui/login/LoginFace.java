@@ -66,6 +66,8 @@ public class LoginFace extends javax.swing.JFrame {
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null,ex.getMessage(), "Error!", JOptionPane.ERROR_MESSAGE);
+                txtUserName.setText(null);
+                pasPassword.setText(null);
             }
         }
     }
@@ -233,6 +235,7 @@ public class LoginFace extends javax.swing.JFrame {
 
     private void pasPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pasPasswordActionPerformed
         logIn();
+        this.txtUserName.requestFocus();
     }//GEN-LAST:event_pasPasswordActionPerformed
 
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed

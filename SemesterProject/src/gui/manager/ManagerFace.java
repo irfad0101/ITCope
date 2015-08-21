@@ -524,21 +524,37 @@ public class ManagerFace extends javax.swing.JFrame {
 
     private void removeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBtnActionPerformed
         // TODO add your handling code here:
-        if(searchID!=0){
-        empDB = DBOperations.getInstace();        
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to remove this employee?","Remove Employee",dialogButton);
-        if(dialogResult == JOptionPane.YES_OPTION){
+       
+        if(searchID!=0 ){
             try {
-                empDB.deleteEmployee(searchID);
-            } catch (SQLException ex) {
+                empDB = DBOperations.getInstace();
+                emp = empDB.getEmplyee(searchID);
+                if(emp==null){
+                    JOptionPane.showMessageDialog(null, "Invalid employee ID", "Error! ", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                int dialogButton = JOptionPane.YES_NO_OPTION;
+                int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to remove this employee?","Remove Employee",dialogButton);
+                if(dialogResult == JOptionPane.YES_OPTION){
+                    try {
+                        empDB.deleteEmployee(searchID);
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ConnectionTimeOutException ex) {
+                        JOptionPane.showMessageDialog(null,ex.toString());
+                        return;
+                    }
+                }   }
+            }catch (SQLException ex) {
                 Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ConnectionTimeOutException ex) {
-                 JOptionPane.showMessageDialog(null,ex.toString());
-                return;
+                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        }
+            
+            }
+            
+        
         else{        
         JOptionPane.showMessageDialog(null, "Please enter an EID. You can check the employee list to find an ID", "Enter an ID ", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -625,6 +641,17 @@ public class ManagerFace extends javax.swing.JFrame {
         if(!"".equals(changeIdText.getText()))
         {
             int eid = Integer.parseInt(changeIdText.getText());
+            try {
+                emp = empDB.getEmplyee(eid);
+            } catch (SQLException ex) {
+                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ConnectionTimeOutException ex) {
+                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                if(emp==null){
+                    JOptionPane.showMessageDialog(null, "Invalid employee ID", "Error! ", JOptionPane.INFORMATION_MESSAGE);
+                }
+            else{
 
             ChangeLogInSetting changeEmpLog = new ChangeLogInSetting();
             try {
@@ -633,6 +660,7 @@ public class ManagerFace extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please enter a valid EID. You can check the employee list to find an ID", "Enter an ID ", JOptionPane.INFORMATION_MESSAGE);
             }
             changeEmpLog.setVisible(true);
+                }
         }
         else{
             JOptionPane.showMessageDialog(null, "Please enter an EID. You can check the employee list to find an ID", "Enter an ID ", JOptionPane.INFORMATION_MESSAGE);

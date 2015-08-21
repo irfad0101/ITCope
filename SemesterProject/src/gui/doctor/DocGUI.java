@@ -31,8 +31,13 @@ import javax.swing.JOptionPane;
 public class DocGUI extends javax.swing.JFrame {
 
     static Doctor newDoc;
+    Patient pnt;
+    DBOperations ptDB;
+    int pid;
+    int mode;
     public DocGUI(Doctor loggedDoc) {
         newDoc = loggedDoc;
+        ptDB = DBOperations.getInstace();
         initComponents();
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -40,7 +45,14 @@ public class DocGUI extends javax.swing.JFrame {
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to log out?","Log out",dialogButton);
                 if(dialogResult == JOptionPane.YES_OPTION){
-                newDoc.setAvailablity(false);
+                int docID = newDoc.getEID();
+                    try {
+                        ptDB.setDoctorAvailability(docID, false);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ConnectionTimeOutException ex) {
+                        Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 setVisible(false);
                 LoginFace logWindow = new LoginFace();
                 logWindow.setVisible(true);
@@ -49,10 +61,7 @@ public class DocGUI extends javax.swing.JFrame {
             }    
                 });
     }
-    Patient pnt;
-    DBOperations ptDB;
-    int pid;
-    int mode;
+    
     
 
     /**

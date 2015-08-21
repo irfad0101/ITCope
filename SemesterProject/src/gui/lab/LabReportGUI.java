@@ -89,16 +89,7 @@ public class LabReportGUI extends javax.swing.JFrame {
         return null;
         
     }
-    public static boolean isValidDate(String inDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
-        try {
-          dateFormat.parse(inDate.trim());
-        } catch (ParseException pe) {
-          return false;
-        }
-        return true;
-  }
+   
 
 
     /**

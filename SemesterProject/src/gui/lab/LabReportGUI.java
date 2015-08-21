@@ -777,16 +777,12 @@ public class LabReportGUI extends javax.swing.JFrame {
         String pid=textPatientID.getText();
         String data;
         try{
-            if(Integer.valueOf(pid) instanceof Integer && Integer.valueOf(pid)<=ad.getLastPID()){
+            if(Integer.valueOf(pid) instanceof Integer && ad.checkPID(pid)){
                 labReport.setPID(Integer.valueOf(pid));
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Patient ID is incorrect");
             textPatientID.setText(null);
-            return;
-        } catch (SQLException ex) {
-            Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Patient ID is not registered");
             return;
         } catch (ConnectionTimeOutException ex) {
             Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -864,16 +860,12 @@ public class LabReportGUI extends javax.swing.JFrame {
         String pid=textPatientID.getText();
         String data=CholesterolAmount.getText();
         try{
-            if(Integer.valueOf(pid) instanceof Integer && Integer.valueOf(pid)<=ad.getLastPID()){
+            if(Integer.valueOf(pid) instanceof Integer && ad.checkPID(pid)){
                 labReport.setPID(Integer.valueOf(pid));
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Patient ID is incorrect");
             textPatientID.setText(null);
-            return;
-        } catch (SQLException ex) {
-            Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Patient ID is not registered");
             return;
         } catch (ConnectionTimeOutException ex) {
             Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -956,16 +948,12 @@ public class LabReportGUI extends javax.swing.JFrame {
         String pid=textPatientID.getText();
         String data=fbsAmount.getText();
         try{
-            if(Integer.valueOf(pid) instanceof Integer && Integer.valueOf(pid)<=ad.getLastPID()){
+            if(Integer.valueOf(pid) instanceof Integer && ad.checkPID(pid)){
                 labReport.setPID(Integer.valueOf(pid));
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Patient ID is incorrect");
             textPatientID.setText(null);
-            return;
-        } catch (SQLException ex) {
-            Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Patient ID is not registered");
             return;
         } catch (ConnectionTimeOutException ex) {
             Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1049,16 +1037,12 @@ public class LabReportGUI extends javax.swing.JFrame {
         String pid=textPatientID.getText();
         String data;
         try{
-            if(Integer.valueOf(pid) instanceof Integer && Integer.valueOf(pid)<=ad.getLastPID()){
+            if(Integer.valueOf(pid) instanceof Integer && ad.checkPID(pid)){
                 labReport.setPID(Integer.valueOf(pid));
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Patient ID is incorrect");
             textPatientID.setText(null);
-            return;
-        } catch (SQLException ex) {
-            Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Patient ID is not registered");
             return;
         } catch (ConnectionTimeOutException ex) {
             Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -1145,16 +1129,12 @@ public class LabReportGUI extends javax.swing.JFrame {
         String pid=textPatientID.getText();
         String data;
         try{
-            if(Integer.valueOf(pid) instanceof Integer && Integer.valueOf(pid)<=ad.getLastPID()){
+            if(Integer.valueOf(pid) instanceof Integer && ad.checkPID(pid)){
                 labReport.setPID(Integer.valueOf(pid));
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(null, "Patient ID is incorrect");
             textPatientID.setText(null);
-            return;
-        } catch (SQLException ex) {
-            Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Patient ID is not registered");
             return;
         } catch (ConnectionTimeOutException ex) {
             Logger.getLogger(LabReportGUI.class.getName()).log(Level.SEVERE, null, ex);

@@ -3,6 +3,8 @@ package semesterproject;
 
 import DataBase.*;
 import gui.login.LoginFace;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SemesterProject {
@@ -13,10 +15,7 @@ public class SemesterProject {
             DBOperations ad = DBOperations.getInstace();
             
 
-            /*try {
-                 UIManager.setLookAndFeel(new AcrylLookAndFeel());
-             } catch (Exception e) {            
-             */
+           
             try {
                  for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                      if ("Nimbus".equals(info.getName())) {
@@ -35,6 +34,11 @@ public class SemesterProject {
              //String[] i = Help.readIPandPort();
              //if(i[0]!=null)
                  //System.out.println(i[0]+" "+i[1]);
-             //System.out.println("sdasdasd  "+Help.getDate(2010,05,06));
+             //System.out.println("sdasdasd  "+Help.getDate(2010,05,06));*/
+        /*try {
+            System.out.println(ad.checkLabTecID("4"));
+        } catch (ConnectionTimeOutException ex) {
+            Logger.getLogger(SemesterProject.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
 }

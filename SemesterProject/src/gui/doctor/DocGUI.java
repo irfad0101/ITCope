@@ -257,12 +257,16 @@ public class DocGUI extends javax.swing.JFrame {
     
     private void SearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchButtonActionPerformed
         mode = 1;
+        ptDB = DBOperations.getInstace();
         if(SearchCatChooser.getSelectedIndex()==0){
             if(!"".equals(SearchBox.getText())){
-                 pid = Integer.parseInt(SearchBox.getText());
+                pid = Integer.parseInt(SearchBox.getText());
             }
+            else{
+            JOptionPane.showMessageDialog(null, "Please enter a PID", "Invalid Data ", JOptionPane.INFORMATION_MESSAGE);
+             }
         }
-        if(SearchCatChooser.getSelectedIndex()==1){            
+        if(SearchCatChooser.getSelectedIndex()==1){
             String NIC = SearchBox.getText();
             if(NIC.contains("V")||NIC.contains("X")){
                 try {
@@ -276,30 +280,40 @@ public class DocGUI extends javax.swing.JFrame {
             else {
                 JOptionPane.showMessageDialog(null, "Please enter a valid NIC", "Invalid NIC ", JOptionPane.INFORMATION_MESSAGE);
             }
-       
+            
         }
-        DBOperations dateOpr = DBOperations.getInstace(); 
-        if(pid!=0){
-            try {
-                pnt = dateOpr.getPatient(pid);
-            } catch (SQLException ex) {
-                Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ConnectionTimeOutException ex) {
-                JOptionPane.showMessageDialog(null,ex.toString());
-                return;
-            }
-            int index = SearchCatChooser.getSelectedIndex();
-            if(index==1){
-                String nic = SearchBox.getText();
+        DBOperations dateOpr = DBOperations.getInstace();
+        try {
+            if(pid!=0 ){   
+                if(ptDB.checkPID(pid+"")){
+                    try {
+                        pnt = dateOpr.getPatient(pid);
 
+                    } catch (SQLException ex) {
+                        Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ConnectionTimeOutException ex) {
+                        JOptionPane.showMessageDialog(null,ex.toString());
+                        return;
+                    }
+                    int index = SearchCatChooser.getSelectedIndex();
+                    if(index==1){
+                        String nic = SearchBox.getText();
+
+                    }
+                    detailList.setModel(new DefaultListModel());
+                    DefaultListModel model = (DefaultListModel)detailList.getModel();
+                    model.addElement("Name : " + pnt.getFullName());
+                    model.addElement("Date of birth : " + pnt.getDateOfBirth());
+                    model.addElement("Gender : " + pnt.getGender());
+                    model.addElement(("Blood group : " + pnt.getBloodGroup()));
+                    model.addElement(("Allergies : " + pnt.getAllergies()));
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Please enter a valid PID", "Invalid PID ", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
-            detailList.setModel(new DefaultListModel());
-            DefaultListModel model = (DefaultListModel)detailList.getModel(); 
-            model.addElement("Name : " + pnt.getFullName());
-            model.addElement("Date of birth : " + pnt.getDateOfBirth());
-            model.addElement("Gender : " + pnt.getGender());
-            model.addElement(("Blood group : " + pnt.getBloodGroup()));
-            model.addElement(("Allergies : " + pnt.getAllergies()));
+        } catch (ConnectionTimeOutException ex) {
+            Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_SearchButtonActionPerformed
@@ -318,32 +332,35 @@ public class DocGUI extends javax.swing.JFrame {
         model.addElement(("Allergies : " + pnt.getAllergies()));
         }
         else{
-            
+            JOptionPane.showMessageDialog(null, "Please enter a valid PID", "Invalid Data ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_ptDetailsBtnActionPerformed
 
     private void TreatReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TreatReportsBtnActionPerformed
-        
-        mode = 2;
-        detailList.setModel(new DefaultListModel());
-         
-         DefaultListModel model = (DefaultListModel)detailList.getModel(); 
+        if(pnt!=null){
+            mode = 2;
+            detailList.setModel(new DefaultListModel());
 
-         ArrayList<Date> medicalDates = null;
-         ptDB = DBOperations.getInstace();
-        try {
-            medicalDates = ptDB.getMedicalDates(pid);
-        } catch (SQLException ex) {
-            Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
-            
-        } catch (ConnectionTimeOutException ex) {
-            JOptionPane.showMessageDialog(null,ex.toString());
-            return;
+             DefaultListModel model = (DefaultListModel)detailList.getModel(); 
+
+             ArrayList<Date> medicalDates = null;
+             ptDB = DBOperations.getInstace();
+            try {
+                medicalDates = ptDB.getMedicalDates(pid);
+            } catch (SQLException ex) {
+                Logger.getLogger(DocGUI.class.getName()).log(Level.SEVERE, null, ex);
+
+            } catch (ConnectionTimeOutException ex) {
+                JOptionPane.showMessageDialog(null,ex.toString());
+                return;
+            }
+             for(Date dt : medicalDates){
+                 model.addElement(dt);
+             }
+        } 
+        else{
+            JOptionPane.showMessageDialog(null, "Please enter a valid PID", "Invalid Data ", JOptionPane.INFORMATION_MESSAGE);
         }
-         for(Date dt : medicalDates){
-             model.addElement(dt);
-         }
-         
     }//GEN-LAST:event_TreatReportsBtnActionPerformed
 
     private void SearchCatChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCatChooserActionPerformed
@@ -351,7 +368,7 @@ public class DocGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchCatChooserActionPerformed
 
     private void labReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_labReportsBtnActionPerformed
-        // TODO add your handling code here:
+        if(pnt!=null){
         mode = 3;
         ptDB = DBOperations.getInstace();
         detailList.setModel(new DefaultListModel());
@@ -368,7 +385,10 @@ public class DocGUI extends javax.swing.JFrame {
         for(Date dt : labDates){
              model.addElement(dt);
          }
-        
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Please enter a valid PID", "Invalid Data ", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_labReportsBtnActionPerformed
 
     private void detailListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_detailListMouseClicked

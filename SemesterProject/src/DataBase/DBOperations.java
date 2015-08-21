@@ -974,6 +974,23 @@ public class DBOperations {
         }
          return false;
     }
+    public boolean checkLabTecID(String eid) throws ConnectionTimeOutException{
+        try {
+            setConenction();            
+            pst = con.prepareStatement("SELECT * FROM Employee WHERE EID = ? AND Position = 'LabTechniciant' ");
+            pst.setString(1, eid);
+            use = pst.executeQuery();                
+           
+            if(use.next()){     
+                return true;
+            }    
+            closeConnection();
+           
+        } catch (SQLException ex) {
+            return false;
+        }
+         return false;
+    }
     public boolean checkUserName(String uname) throws ConnectionTimeOutException{       
         try {
             setConenction();

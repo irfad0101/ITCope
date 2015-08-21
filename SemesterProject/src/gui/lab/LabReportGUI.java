@@ -791,14 +791,14 @@ public class LabReportGUI extends javax.swing.JFrame {
             
         }
         try{
-            if(Integer.valueOf(tecId) instanceof Integer){
+            if(Integer.valueOf(tecId) instanceof Integer && ad.checkLabTecID(tecId)){
                 labReport.setLabTechID(Integer.valueOf(tecId));
             }
-        }catch(NumberFormatException ex){
+        }catch(NumberFormatException  | ConnectionTimeOutException ex){
             JOptionPane.showMessageDialog(null, "Lab technician ID is incorrect");
             textLabTecID.setText(null);
             return;
-        }
+        } 
         try{
             Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
             if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
@@ -874,14 +874,14 @@ public class LabReportGUI extends javax.swing.JFrame {
            
         }
         try{
-            if(Integer.valueOf(tecId) instanceof Integer){
+            if(Integer.valueOf(tecId) instanceof Integer && ad.checkLabTecID(tecId)){
                 labReport.setLabTechID(Integer.valueOf(tecId));
             }
-        }catch(NumberFormatException ex){
+        }catch(NumberFormatException  | ConnectionTimeOutException ex){
             JOptionPane.showMessageDialog(null, "Lab technician ID is incorrect");
             textLabTecID.setText(null);
             return;
-        }
+        } 
         try{
             Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
             if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
@@ -961,14 +961,14 @@ public class LabReportGUI extends javax.swing.JFrame {
             return;
         }
         try{
-            if(Integer.valueOf(tecId) instanceof Integer){
+            if(Integer.valueOf(tecId) instanceof Integer && ad.checkLabTecID(tecId)){
                 labReport.setLabTechID(Integer.valueOf(tecId));
             }
-        }catch(NumberFormatException ex){
+        }catch(NumberFormatException  | ConnectionTimeOutException ex){
             JOptionPane.showMessageDialog(null, "Lab technician ID is incorrect");
             textLabTecID.setText(null);
             return;
-        }
+        } 
         try{
             Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
             if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
@@ -1051,14 +1051,14 @@ public class LabReportGUI extends javax.swing.JFrame {
            
         }
         try{
-            if(Integer.valueOf(tecId) instanceof Integer){
+            if(Integer.valueOf(tecId) instanceof Integer && ad.checkLabTecID(tecId)){
                 labReport.setLabTechID(Integer.valueOf(tecId));
             }
-        }catch(NumberFormatException ex){
+        }catch(NumberFormatException  | ConnectionTimeOutException ex){
             JOptionPane.showMessageDialog(null, "Lab technician ID is incorrect");
             textLabTecID.setText(null);
             return;
-        }
+        } 
         try{
             Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
             if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){
@@ -1143,14 +1143,14 @@ public class LabReportGUI extends javax.swing.JFrame {
         
         }
         try{
-            if(Integer.valueOf(tecId) instanceof Integer){
+            if(Integer.valueOf(tecId) instanceof Integer && ad.checkLabTecID(tecId)){
                 labReport.setLabTechID(Integer.valueOf(tecId));
             }
-        }catch(NumberFormatException ex){
+        }catch(NumberFormatException  | ConnectionTimeOutException ex){
             JOptionPane.showMessageDialog(null, "Lab technician ID is incorrect");
             textLabTecID.setText(null);
             return;
-        }
+        } 
         try{
             Date testDate=Help.getDate(Integer.valueOf(textYear.getText()), Integer.valueOf(textMonth.getText()), Integer.valueOf(textDate.getText()));
             if(Integer.valueOf(textYear.getText())instanceof Integer && Integer.valueOf(textMonth.getText())instanceof Integer && Integer.valueOf(textDate.getText())instanceof Integer && testDate!=null){

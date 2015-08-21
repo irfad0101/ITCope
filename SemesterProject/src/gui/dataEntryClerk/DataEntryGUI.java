@@ -10,6 +10,8 @@ import Domain.Patient;
 import gui.login.LoginFace;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -1072,25 +1074,21 @@ public class DataEntryGUI extends javax.swing.JFrame {
             return false;
         }
         String NIC = txtNIC.getText();
-        if (!NIC.equals("") && !(NIC.length()==10 && (NIC.substring(NIC.length()-1, NIC.length()).equalsIgnoreCase("V") || NIC.substring(NIC.length()-1, NIC.length()).equalsIgnoreCase("V")))){
-            JOptionPane.showMessageDialog(this, "Invalid NIC","Invalid Detail", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
-        try {
-            if (!NIC.equals(""))
-                Integer.parseInt(NIC.substring(0, NIC.length() - 1)); // first 9 digits should be numbers
-            if (p.getNIC()==null && DBOperations.getInstace().checkPatientNIC(NIC)){  // check NIC available in database only if it is not entered previously for this patient
-                JOptionPane.showMessageDialog(this, "NIC already exsits","Invalid Detail", JOptionPane.WARNING_MESSAGE);
+        if (!NIC.equals("")) {
+            try {
+                if (!Help.isValidNIC(NIC)) {
+                    JOptionPane.showMessageDialog(this, "Invalid NIC", "Invalid Detail", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+                if (DBOperations.getInstace().checkPatientNIC(NIC)) {  // check whether this NIC already exists in database because nic should be unique
+                    JOptionPane.showMessageDialog(this, "NIC already exsits", "Invalid Detail", JOptionPane.WARNING_MESSAGE);
+                    return false;
+                }
+            } catch (ConnectionTimeOutException ex) {
+                JOptionPane.showMessageDialog(this, "Cannot check NIC. Connection Timed out. Please try again.", "Time out", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid NIC", "Invalid Detail", JOptionPane.WARNING_MESSAGE);
-            return false;
-        } catch (ConnectionTimeOutException ex) {
-            JOptionPane.showMessageDialog(this, "Cannot check NIC. Connection Timed out. Please try again.", "Time out", JOptionPane.WARNING_MESSAGE);
-            return false;
         }
-        
         return true;
     }
 }

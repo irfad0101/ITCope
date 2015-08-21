@@ -130,6 +130,11 @@ public class AdmitDischargeForm extends javax.swing.JFrame {
         lblDate.setText("Admit Date :");
 
         txtPID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtPID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPIDKeyTyped(evt);
+            }
+        });
 
         txtPatientName.setEditable(false);
         txtPatientName.setBackground(new java.awt.Color(204, 204, 204));
@@ -139,16 +144,31 @@ public class AdmitDischargeForm extends javax.swing.JFrame {
         jLabel14.setText("YYYY");
 
         txtAdmitYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtAdmitYear.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAdmitYearKeyTyped(evt);
+            }
+        });
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel15.setText("MM");
 
         txtAdmitMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtAdmitMonth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAdmitMonthKeyTyped(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel16.setText("DD");
 
         txtAdmitDay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtAdmitDay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAdmitDayKeyTyped(evt);
+            }
+        });
 
         btnAdmitDisharge.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnAdmitDisharge.setText("Admit Patinet");
@@ -170,18 +190,38 @@ public class AdmitDischargeForm extends javax.swing.JFrame {
         jLabel2.setText("Room Number :");
 
         txtRoomNumber.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtRoomNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRoomNumberKeyTyped(evt);
+            }
+        });
 
         txtDischargeDay.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDischargeDay.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDischargeDayKeyTyped(evt);
+            }
+        });
 
         lblDischargeD.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblDischargeD.setText("DD");
 
         txtDischargeMonth.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDischargeMonth.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDischargeMonthKeyTyped(evt);
+            }
+        });
 
         lblDischargeM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblDischargeM.setText("MM");
 
         txtDischargeYear.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDischargeYear.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDischargeYearKeyTyped(evt);
+            }
+        });
 
         lblDischargeY.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblDischargeY.setText("YYYY");
@@ -328,6 +368,8 @@ public class AdmitDischargeForm extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Sorry an error occured while updating", "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (ConnectionTimeOutException ex) {
                     JOptionPane.showMessageDialog(this, "Cannot update room. Connection Timed out. Please try again.", "Time out", JOptionPane.WARNING_MESSAGE);
+                } catch (NumberFormatException ex){
+                    JOptionPane.showMessageDialog(this, "Invalid detail.", null, JOptionPane.WARNING_MESSAGE);
                 }
             }
         } else if (JOptionPane.showConfirmDialog(this, "Are you sure you want to discharge?","Confirm Action",JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
@@ -353,6 +395,46 @@ public class AdmitDischargeForm extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setEnabled(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void txtRoomNumberKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoomNumberKeyTyped
+        if (!Help.allowOnlyDigit(txtRoomNumber.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtRoomNumberKeyTyped
+
+    private void txtPIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPIDKeyTyped
+        if (!Help.allowOnlyDigit(txtPID.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtPIDKeyTyped
+
+    private void txtAdmitYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmitYearKeyTyped
+        if (!Help.allowOnlyDigit(txtAdmitYear.getText(), 4, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtAdmitYearKeyTyped
+
+    private void txtAdmitMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmitMonthKeyTyped
+        if (!Help.allowOnlyDigit(txtAdmitMonth.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtAdmitMonthKeyTyped
+
+    private void txtAdmitDayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmitDayKeyTyped
+        if (!Help.allowOnlyDigit(txtAdmitDay.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtAdmitDayKeyTyped
+
+    private void txtDischargeYearKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDischargeYearKeyTyped
+        if (!Help.allowOnlyDigit(txtDischargeYear.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtDischargeYearKeyTyped
+
+    private void txtDischargeMonthKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDischargeMonthKeyTyped
+        if (!Help.allowOnlyDigit(txtDischargeMonth.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtDischargeMonthKeyTyped
+
+    private void txtDischargeDayKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDischargeDayKeyTyped
+        if (!Help.allowOnlyDigit(txtDischargeDay.getText(), 10, evt.getKeyChar()))
+            evt.consume();
+    }//GEN-LAST:event_txtDischargeDayKeyTyped
 
     /**
      * @param args the command line arguments

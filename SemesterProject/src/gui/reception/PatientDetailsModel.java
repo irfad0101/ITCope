@@ -53,9 +53,6 @@ public class PatientDetailsModel extends DetailsTableModel {
         if (values.size()==0){
             JOptionPane.showMessageDialog(null, "No match found!", null, JOptionPane.INFORMATION_MESSAGE);
         }
-        if (values.size()==0){
-            JOptionPane.showMessageDialog(null, "No match found!", null, JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 
     @Override

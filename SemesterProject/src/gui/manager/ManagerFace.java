@@ -6,6 +6,7 @@ package gui.manager;
 
 import DataBase.ConnectionTimeOutException;
 import DataBase.DBOperations;
+import DataBase.Help;
 import Domain.Employee;
 import Domain.EmployeeFactory;
 import gui.login.ChangeLogInSetting;
@@ -425,32 +426,35 @@ public class ManagerFace extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        // TODO add your handling code here:        
-        empDB = DBOperations.getInstace();
-        nameLabel.setEnabled(true);
-        posLabel.setEnabled(true);
-        nicLabel.setEnabled(true);
-        searchID = Integer.parseInt(eidText.getText());
-        try {
-            emp = empDB.getEmplyee(searchID);
-            if(emp==null){
-                JOptionPane.showMessageDialog(null, "Invalid employee ID", "Error! ", JOptionPane.INFORMATION_MESSAGE);
+        if(!"".equals(eidText.getText())){       
+            empDB = DBOperations.getInstace();
+            nameLabel.setEnabled(true);
+            posLabel.setEnabled(true);
+            nicLabel.setEnabled(true);
+            searchID = Integer.parseInt(eidText.getText());
+            try {
+                emp = empDB.getEmplyee(searchID);
+                if(emp==null){
+                    JOptionPane.showMessageDialog(null, "Invalid employee ID", "Error! ", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    nameLabel.setText("Name :  " + emp.getName());
+                    posLabel.setText("Position :  " + emp.getPosition());
+                    nicLabel.setText("NIC :  " + emp.getNIC());
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else{
-                nameLabel.setText("Name :  " + emp.getName());
-                posLabel.setText("Position :  " + emp.getPosition());
-                nicLabel.setText("NIC :  " + emp.getNIC());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+            catch(NullPointerException exN){
+              //  Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, exN);
+            } catch (ConnectionTimeOutException ex) {
+                 JOptionPane.showMessageDialog(null,ex.toString());
+                return;
+             }
         }
-        catch(NullPointerException exN){
-          //  Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, exN);
-        } catch (ConnectionTimeOutException ex) {
-             JOptionPane.showMessageDialog(null,ex.toString());
-            return;
+        else{
+            JOptionPane.showMessageDialog(null, "Please enter an EID. You can check the employee list to find an ID", "Enter an ID ", JOptionPane.INFORMATION_MESSAGE);
         }
-        
     }//GEN-LAST:event_SearchBtnActionPerformed
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
@@ -470,18 +474,23 @@ public class ManagerFace extends javax.swing.JFrame {
                 if(!(empDB.checkEmployeeNIC(nic))){
                     if(!(empDB.checkUserName(userName))){
                         if((Arrays.equals(password, conPassword))){
-                            emp1.setName(name);
-                            emp1.setNIC(nic);
-                            emp1.setPassword(Arrays.toString(password));
-                            emp1.setUsername(userName);
-                            try {
-                                empDB.addEmployee(emp1);
+                            if(Help.isValidNIC(nic)){
+                                emp1.setName(name);
+                                emp1.setNIC(nic);
+                                emp1.setPassword(Arrays.toString(password));
+                                emp1.setUsername(userName);
+                                try {
+                                    empDB.addEmployee(emp1);
 
-                            } catch (SQLException ex) {
-                                Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (ConnectionTimeOutException ex) {
-                                JOptionPane.showMessageDialog(null,ex.toString());
-                                return;
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(ManagerFace.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (ConnectionTimeOutException ex) {
+                                    JOptionPane.showMessageDialog(null,ex.toString());
+                                    return;
+                                }
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Please enter a valid NIC.", "Invalid NIC ", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
 
